@@ -8,6 +8,7 @@ const CartItem = ({ onContinueShopping }) => {
   const dispatch = useDispatch();
 
 
+
  // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
     let total = 0; // Initialize total to 0
@@ -29,6 +30,7 @@ const CartItem = ({ onContinueShopping }) => {
   };
 
   
+
 
 
   const handleIncrement = (item) => {

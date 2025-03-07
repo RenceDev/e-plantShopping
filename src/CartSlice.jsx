@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import{ProductList} from './ProductList';
 
 export const CartSlice = createSlice({
   name: 'cart',
@@ -9,7 +10,7 @@ export const CartSlice = createSlice({
     // Add item to the cart
     addItem: (state, action) => {
       const { name, image, cost } = action.payload;
-      const existingItem = state.items.find(item => item.name === name); // Check if item exists
+      const existingItem = state.items.find(items => items.name == name); // Check if item exists
       if (existingItem) {
         existingItem.quantity++; // If item exists, increment its quantity
       } else {
@@ -18,6 +19,9 @@ export const CartSlice = createSlice({
       }
     },
     
+
+
+
     // Remove item from the cart
     removeItem: (state, action) => {
       const { name } = action.payload; // Get item name from payload

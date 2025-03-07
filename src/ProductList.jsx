@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import CartItem from './CartItem';
 import { addItem } from './CartSlice';
 function ProductList({ onHomeClick }) {
-        const [showCart, setShowCart] = useState(0);
+        const [showCart, setShowCart] = useState();
         const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
         const [addedToCart, setAddedToCart] = useState({}); //added to cart function
         const plantsArray = [
@@ -256,16 +256,15 @@ function ProductList({ onHomeClick }) {
         e.preventDefault();
         setShowCart(false);
     };
-
-    const handleAddToCart = (product) => {
-        dispatch(addItem(product));
+    const dispatch = useDispatch();
+    const handleAddToCart = (plant) => {
+        dispatch(addItem({ name: plant.name }));
         setAddedToCart((prevState) => ({
            ...prevState,
-           [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart
+           [{ name: plant.name }]: true, // Set the product name as key and value as true to indicate it's added to cart
          }));
       };
-   
-
+    
          
 
     return (

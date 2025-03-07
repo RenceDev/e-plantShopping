@@ -7,46 +7,56 @@ const CartItem = ({ onContinueShopping }) => {
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
 
-  // Calculate total amount for all products in the cart
+
+ // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
- 
- let total = cart.forEach(
-    {quantity,cost});
- parseFloat(item.cost.substring(1));
- return
- {
-total =  {quantity} * {cost}
+    let total = 0; // Initialize total to 0
 
-    console.log(total);
+    // Iterate through the cart and accumulate the total
+    cart.forEach(item => {
+      const quantity = item.quantity; // Get quantity
+      const cost = parseFloat(item.cost.substring(1)); // Remove currency symbol and convert to number
+      total += quantity * cost; // Add to total
+    });
 
- };
-    
- };
-
-  const handleContinueShopping = (e) => {
-   
+    return total; // Return the total amount
   };
 
+
+  const handleContinueShopping = (e) => {
+    onContinueShopping();
+    
+  };
+
+  
 
 
   const handleIncrement = (item) => {
+    dispatch(updateQuantity({ name: item.name, quantity: item.quantity + 1 }));
+  };
+ // Handle decrement item quantity
+ const handleDecrement = (item) => {
+    if (item.quantity > 1) {
+      dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
+    } else {
+      dispatch(removeItem({ name: item.name })); // Remove item if quantity drops to 0
+    }
+  };
+// Handle remove item from the cart
+const handleRemove = (item) => {
+    dispatch(removeItem({ name: item.name }));
   };
 
-  const handleDecrement = (item) => {
-   
+  // Handle checkout (future functionality)
+  const handleCheckoutShopping = () => {
+    alert('Functionality to be added for future reference');
   };
 
-  const handleRemove = (item) => {
+ // Calculate total cost for an individual item
+ const calculateTotalCost = (item) => {
+    const cost = parseFloat(item.cost.substring(1)); // Convert cost to number
+    return cost * item.quantity; // Calculate total cost
   };
-
-  const handleCheckoutShopping = (e) => {
-  alert('Functionality to be added for future reference');
-};
-
-  // Calculate total cost based on quantity for an item
-  const calculateTotalCost = (item) => {
-  };
- 
 
   
   return (
